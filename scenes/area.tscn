@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1lnyk7esk8f5"]
+
+[ext_resource type="Script" path="res://scripts/wall.gd" id="1_4iq0y"]
+[ext_resource type="Texture2D" uid="uid://dvkx6ulg4ncpk" path="res://assets/ground.jpg" id="2_dhhuh"]
+
+[node name="Area2D" type="StaticBody2D"]
+script = ExtResource("1_4iq0y")
+
+[node name="Area2D2" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygonArea" type="CollisionPolygon2D" parent="Area2D2"]
+
+[node name="CollisionPolygonStatic" type="CollisionPolygon2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_dhhuh")
+
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://f0o3ua682wtl"]
+
+[ext_resource type="LabelSettings" uid="uid://blnjky8bq3ohh" path="res://assets/label.tres" id="1_3sv7f"]
+
+[sub_resource type="Curve" id="Curve_qtet1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.136364, 1), 0.371936, 0.371936, 0, 0, Vector2(1, 0.549451), -0.161172, -0.161172, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_c6kpq"]
+curve = SubResource("Curve_qtet1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_owkf0"]
+particle_flag_disable_z = true
+angle_min = -5.0
+angle_max = 5.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 450.0
+initial_velocity_max = 450.0
+gravity = Vector3(0, 1000, 0)
+scale_curve = SubResource("CurveTexture_c6kpq")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wu7pf"]
+viewport_path = NodePath("viewport")
+
+[node name="damage_particle" type="Node2D"]
+
+[node name="viewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(64, 48)
+
+[node name="damage" type="Label" parent="viewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "67"
+label_settings = ExtResource("1_3sv7f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="particle" type="GPUParticles2D" parent="."]
+z_index = 4
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_owkf0")
+texture = SubResource("ViewportTexture_wu7pf")
+lifetime = 2.0
+one_shot = true
